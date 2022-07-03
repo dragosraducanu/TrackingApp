@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "com.dragos.challenge.data.source.db";
+option java_multiple_files = true;
+
+message Location {
+    double lat = 1;
+    double lng = 2;
+    int64 timestamp = 3;
+    string imageUrl = 4;
+    string imageUri = 5;
+}

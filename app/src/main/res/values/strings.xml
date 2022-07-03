@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Dragos - Challenge</string>
+    <string name="start_label">Start</string>
+    <string name="stop_label">Stop</string>
+    <string name="tracking_started_message">Activity tracking has been started!</string>
+    <string name="tracking_stopped_message">Activity tracking has been stopped!</string>
+</resources>
