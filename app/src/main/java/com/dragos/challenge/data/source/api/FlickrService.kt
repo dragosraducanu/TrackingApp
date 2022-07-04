@@ -19,8 +19,8 @@ interface FlickrService {
         @Query("safe_search") safeSearch: String = "1",
         @Query("lat") lat: Double,
         @Query("lon") lng: Double,
-        @Query("radius") radius: Double = 1.0,
-        @Query("per_page") perPage: Int = 1,
+        @Query("radius") radius: Double = 0.5,
+        @Query("per_page") perPage: Int = 5,
         @Query("extras") extras: String = "url_w"
     ): ImageSearchResult
 

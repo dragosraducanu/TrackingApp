@@ -7,6 +7,7 @@ import com.dragos.challenge.data.source.db.TrackingData
 import com.dragos.challenge.data.source.db.TrackingDataStoreContract
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -32,7 +33,12 @@ class ImageRepository @Inject constructor(
             val searchResult = search(latitude, longitude).result.images
             if (searchResult.isEmpty()) return null
 
-            val url = searchResult.first().url
+            val trackingData = fetchTrackingData().first().locationList
+
+            val url = searchResult.find { image ->
+                image.url != null &&
+                        trackingData.none { location -> location.imageUrl == image.url }
+            }?.url
 
             if (url != null) {
                 locationBuilder.imageUrl = url

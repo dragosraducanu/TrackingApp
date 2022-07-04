@@ -1,7 +1,6 @@
 package com.dragos.challenge.ui.screen
 
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,12 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.dragos.challenge.R
 import com.dragos.challenge.ui.MainUiState
@@ -99,21 +97,19 @@ fun ImageGallery(
         verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         items(images) { item ->
-            Image(
-                painter = rememberAsyncImagePainter(
-                    model = ImageRequest.Builder(LocalContext.current)
-                        .data(item.toUri())
-                        .addHeader("User-Agent", "curl/7.79.1")
-                        .crossfade(true)
-                        .placeholder(R.drawable.ic_placeholder)
-                        .error(R.drawable.ic_placeholder)
-                        .build(),
-                ),
-                contentScale = ContentScale.FillWidth,
-                contentDescription = null,
+            AsyncImage(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(dimensionResource(id = R.dimen.image_height))
+                    .height(300.dp),
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(item.toUri())
+                    .addHeader("User-Agent", "curl/7.79.1")
+                    .crossfade(true)
+                    .placeholder(R.drawable.ic_placeholder)
+                    .error(R.drawable.ic_placeholder)
+                    .build(),
+                contentDescription = null,
+                contentScale = ContentScale.FillWidth
             )
         }
     }

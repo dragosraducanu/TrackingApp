@@ -21,7 +21,6 @@ class AppModule {
         return NetworkConnectivityManager(context)
     }
 
-    @Singleton
     @Provides
     fun providesServiceConnectionManager(
         @ApplicationContext context: Context
